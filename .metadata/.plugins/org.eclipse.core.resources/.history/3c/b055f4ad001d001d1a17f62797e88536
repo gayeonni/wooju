@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta charset="UTF-8">
+<title>welcome to wooju market</title>
+</head>
+<style>
+body{
+
+background-image:url('img/uni.jpg');
+background-size: cover;
+}
+</style>
+<body >
+	<div class="container-fluid">
+		<a class="p-2" href="/"><img th:src="@{/img/main_logo_rm.png}"
+			style="height: 100px"></a>
+		<p>
+		<center style="font-size: 30px; color:#FFFFFF">여성 안심 중고 거래 서비스 우주마켓 
+		<p>
+		Would you use it?</center>
+		<p>
+		<p>
+		<center><table border="1" style="width:300px; height: 300px; background-color: #FFFFFF">
+		<th>
+			<form th:action="@{/user/login}" method="post">
+				<div th:if="${param.error}">
+					<div class="alert alert-danger">사용자ID 또는 비밀번호를 확인해 주세요.</div>
+				</div>
+				<div class="mb-3">
+					<label for="username" class="form-label">ID</label> <input
+						type="text" name="username" id="username" class="form-control">
+				</div>
+				<p>
+				<div class="mb-3">
+				<label for="password" class="form-label">PW </label> <input
+						type="password" name="password" id="password" class="form-control">
+				</div>
+				<p>
+					<button type="submit" class="btn btn-primary"
+						style="width: 163px; height: 38px; color:#000000;background-color:#a77cdb; border:0; border-radius: 5px; font-size:14px" >login</button>
+			</form>
+			<a class="p-2"
+				href="https://kauth.kakao.com/oauth/authorize?client_id=301a6639546e52f69c69f0696ec14651&redirect_uri=http://localhost:8080/user/auth/kakao/callback&response_type=code">
+				<img th:src="@{/img/kakao_login_medium_narrow.png}"
+				style="height: 40px">
+			</a>
+		<p>
+			<a class="nav-link" th:href="@{/user/signup}" > <img src="/img/sign.png" style="height: 40px"></a>
+		</table>
+		</th></center>
+	</div>
+	</div>
+</body>
+</html>

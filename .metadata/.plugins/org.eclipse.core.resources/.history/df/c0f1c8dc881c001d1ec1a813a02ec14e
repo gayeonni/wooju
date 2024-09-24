@@ -1,0 +1,26 @@
+<h3>회원정보 수정<h3>
+
+<div class = "useredit">
+	<div class="fa-user">개인정보 수정</div>
+	<form role="form" th:action="@{/mypage/recreate}" th:object="${memberform}" method="post">
+		<div class="form-group">
+			<label th:for="name">닉네임</label>
+			<input type="text" th:field="*{name}" class="form-control"
+				placeholder="닉네임을 입력하세요"
+				th:class="${#fields.hasErrors('name')}? 'form-control fieldError' : 'form-control'">
+			<p th:if="${#fields.hassErrors('name')}"
+				th:errors="*{name}">잘못입력</p>
+		</div>
+		<div class="form-group">
+			<label th:for="email">이메일</label>
+			<input type"email" th:field="*{email}" class="form-control"
+					placeholder="None" th:class="${#fields.hasErrors('email')}? 'form-control fieldError' : 'form-control'">
+			<p th:if="${#fields.hasErrors('email')}"
+				th:errors="*{email}">Incorrect input</p>
+		</div>
+		<button type="submit" class="btn btn-primary">수정</button>
+	</form>
+	 <br/>
+        </div>
+    </div>
+</body>		

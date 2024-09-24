@@ -1,0 +1,23 @@
+<!DOCTYPE html
+><html>
+<head>    
+<meta charset="utf-8">
+    <style>        
+body{            margin: 0px;            padding: 0px;        }
+        div{            width: 100px;            height: 100px;        }
+        div:nth-child(1){            background-color: lightpink;            margin-left: 300px;        }
+        div:nth-child(2){            background-color: lightgreen;            position: static;    /*디폴트값*/        }
+        div:nth-child(3){            background-color: lightgray;        }        
+div:nth-child(4){            
+background-color: lightyellow;        }        div:nth-child(5){            background-color: lightblue;        }    
+</style>
+</head>
+<body>    
+<div>1</div>    
+<div>2</div>    
+<div>3</div>    
+<div>4</div>    
+<div>5</div>
+</body>
+</html>
+

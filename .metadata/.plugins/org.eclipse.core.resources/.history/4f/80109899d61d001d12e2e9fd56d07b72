@@ -1,0 +1,15 @@
+package com.mysite.wooju.sale;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+public class UploadFile {
+   private String uploadFilename;
+   private String storeFilename;
+   
+   public UploadFile(String uploadFileName, String storeFileName) {
+       this.uploadFileName = uploadFileName;
+       this.storeFileName = storeFileName;
+   }
+}

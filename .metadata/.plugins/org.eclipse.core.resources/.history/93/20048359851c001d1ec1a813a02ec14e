@@ -1,0 +1,36 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+	<div class="container">
+	이름
+	<div th:text="${siteuser.getUsername()}"</div>
+	</div>
+	<div class="container">
+		<h7><a class="page" th:href="@{/user/mypage/recreate}">회원정보 수정</a>
+		</h7>
+	</div>
+	<div class="container">
+		<a class="page" th:href="@{user/mypage/contents}">내가 쓴 글 보기</a>
+	<hr style="border: solid 1px black;">
+
+		<table class="table table-striped">
+			<h3>내가 찜한 매물</h3>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>숫자!</td>
+					<td>뭐를</td>
+					<td>찜했을까</td>
+					<td>모르겠어</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+		
+	

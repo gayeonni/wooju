@@ -1,0 +1,14 @@
+<a
+href="#gotobottom"
+title="Go to Bottom"
+style="display: scroll; position: fixed; bottom: 30px; right: 5px;"
+rel="nofollow"
+onfocus='this.blur()'
+>
+
+<img
+src="img/main_logo_rm.png"
+style="width: 25px; height: 25px; border-radius: 15px;"
+/>
+
+</a>

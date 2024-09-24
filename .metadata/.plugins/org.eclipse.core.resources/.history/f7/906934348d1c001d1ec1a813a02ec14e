@@ -1,0 +1,81 @@
+<!--<th:block th:fragment="sidebarFragment">
+
+<div class="card my-4">
+	<h5 class="card-header">카테고리</h5>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-lg-6">
+				<ul class="list-unstyled mb-0">
+					<li>
+						<a href="example.html">의료</a>
+					</li>
+					<li>
+						<a href="example.html">인테리어/가전제품</a>
+					</li>
+					<li>
+						<a href="example.html">여성용품</a>
+					</li>
+					<li>
+						<a href="example.html">책/티켓/문화</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</th:block>-->
+
+<!DOCTYPE html>
+<th:block th:fragment="sidebarFragment">
+<html>
+
+<head>
+<style type="text/css">
+	ul.dae{
+		list-style-type:none;
+		background-color:#ccc;
+		width:200px;
+		padding:0;
+		margin:0;
+		position:fixed;
+		height:100%;
+		overflow:auto;
+	}
+
+	li a{
+		text-decoration: none;
+		display:block;
+		color:#000;
+		padding: 8px 15px 8px 15px;
+		font-weight:bold;
+	}
+	
+	
+	li a.job{
+		background-color: tomato;
+		color:#fff;
+		
+	}
+	
+	li a:hover:nor(.job){
+		background-color: #333;
+		color:#fff;
+	}
+	
+	</style>
+	
+	
+	<ul class="dae">
+		<li><a class="job">카테고리</a></li>
+		<li th:each="category : ${categories}">
+			<a th:href="@{|/sale/category/${category.id}|}" th:text="${category.name}">
+				<p>
+				</p>
+		
+			</a>
+		</li>
+	</ul>
+	
+</head>
+</html>
+	

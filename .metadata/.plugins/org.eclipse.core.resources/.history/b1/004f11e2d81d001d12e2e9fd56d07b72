@@ -1,0 +1,21 @@
+package com.mysite.wooju.sale;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class SaleImageRepo {
+	private final Map<Integer, Sale> store = new HashMap<>();
+    private long sequence = 0L;
+
+    public Sale save(Sale sale) {
+    	sale.setId((int) ++sequence);
+        store.put(sale.getId(), sale);
+        return sale;
+    }
+    public Sale findById(Long id) {
+        return store.get(id);
+    }
+}

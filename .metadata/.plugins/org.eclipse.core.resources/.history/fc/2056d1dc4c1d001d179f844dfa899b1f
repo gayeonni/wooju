@@ -1,0 +1,29 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+  
+		    
+		    
+<div class="container">
+   <div class="card">
+      <div class="card-body">
+         <div class="row">
+         
+         
+         <div style="font-size:50px">Would you use it? 여성 안심 중고 거래 플랫폼 우주마켓</div>
+         <p>
+         
+         
+            <div class="col-3" th:each="sale, loop: ${sales}">
+               <a th:href="@{|/sale/detail/${sale.id}|}"> <img class="card-img-top"
+                     th:src="@{/img/main_logo_rm.png}" alt="" style="width:100%"></a>
+               <h5 class="card-title"><div th:text="${sale.subject}"></div></h5>
+               <h7 class="card-text"><div th:if="${sale.author != null}" th:text="${sale.author.username}"></div></h7>
+               <p class="card-text"><div th:if="${sale.category != null}" th:text="${sale.category.name}"></div></p>
+               </div>
+            </div>
+         </div>
+         </div>
+   </div>
+
+</div>
+</html>

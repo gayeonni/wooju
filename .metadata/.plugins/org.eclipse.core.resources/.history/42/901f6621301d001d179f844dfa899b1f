@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<th:block th:fragment="sidebarFragment">
+<html>
+
+<head>
+
+	
+</head>
+</html>
+	

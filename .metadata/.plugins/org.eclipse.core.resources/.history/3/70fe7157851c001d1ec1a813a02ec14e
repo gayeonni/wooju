@@ -1,0 +1,33 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+
+
+<style>
+      p { margin:20px 0px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <p>상품 목록</p>
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <img src="https://wikidocs.net/images/page/161186/O_2-07_4.png" alt="" />
+            <div class="card-body">
+            	<h3 class="card-title text-primary">?</h3>
+            	<ul>
+            		<li th:each="question : ${questionList}">
+            
+              <h5 class="card-title">[[${question.subject}]]</h5>
+              <p class="card-text">[[${question.content}]]</p>
+              <a href="#" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+

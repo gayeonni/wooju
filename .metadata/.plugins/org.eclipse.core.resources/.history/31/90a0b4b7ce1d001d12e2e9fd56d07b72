@@ -1,0 +1,15 @@
+package com.mysite.wooju.sale;
+
+public interface WebConfig implements WebMvcConfigurer {
+	@Value("${resource.path}")
+	private String resourcePath;
+	
+	@value("${upload.path}")
+	private String uploadPath;
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegitory registry) {
+		registry.addResourceHandler(uploadPath)
+				.addResourceLocations(resourcePath);
+	}
+}

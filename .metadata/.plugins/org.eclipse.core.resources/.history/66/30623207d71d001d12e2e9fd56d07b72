@@ -1,0 +1,48 @@
+package com.mysite.wooju.sale;
+
+import java.util.List;
+
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.mysite.wooju.category.Category;
+
+public interface SaleRepository extends JpaRepository<Sale, Integer> {
+	Sale findBySubject(String subject);
+	Sale findBySubjectAndContent(String subject, String content);
+    List<Sale> findBySubjectLike(String subject);
+    Page<Sale> findAll(Pageable pageable);
+    Page<Sale> findAll(Specification<Sale> spec, Pageable pageable);
+    List<Sale> findByCategory(Category category);
+    
+    Page<Sale> findAllByCategory(Pageable pageable, Category category);
+    
+
+    @Query("select "
+            + "distinct q "
+            + "from Sale q "
+            + "left outer join SiteUser u1 on q.author=u1 "
+            + "left outer join Answer a on a.sale=q "
+            + "left outer join SiteUser u2 on a.author=u2 "
+            + "where "
+            + "   q.subject like %:kw% "
+            + "   or q.content like %:kw% "
+            + "   or u1.username like %:kw% "
+            + "   or a.content like %:kw% "
+            + "   or u2.username like %:kw% ")
+    Page<Sale> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
+    
+    
+    @Modifying    
+    @Query("update Sale p set p.view = p.view + 1 where p.id = :id")    
+    int updateView(@Param("id") int id);
+    
+    
+    
+}

@@ -1,0 +1,45 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+  <table class="table">
+		        <thead class="table-dark">
+		            <tr class="text-center">
+		                <th style="width:30%">제목</th>
+						<th>글쓴이</th>
+		                <th>작성일시</th>
+		                </tr>
+		        </thead>
+		        <tbody>
+		        <tr class="text-center" th:each="sales, loop : ${sales}">
+		         <td class="text-start">
+		                <a th:href="@{|/sale/detail/${sales.id}|}" th:text="${sales.subject}"></a>  
+		                		                <span class="text-danger small ms-2"
+		                        th:if="${#lists.size(sales.answerList) > 0}" 
+		                        th:text="${#lists.size(sales.answerList)}">
+		                    </span>
+		                </td>
+		                <td><span th:if="${sales.author != null}" th:text="${sales.author.username}"></span></td>
+		                 <td th:text="${#temporals.format(sales.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+		         
+		            </tr>
+		        </tbody>
+		    </table>
+		    
+		    
+		    <div class="container">
+   <div class="card">
+      <div class="card-body">
+         <div class="row">
+            <div class="col-3" th:each="sale, loop: ${sales}">
+               <a th:href="@{|/sale/detail/${sale.id}|}"> <img class="card-img-top"
+                     th:src="@{/img/main_logo_rm.png}" alt="" style="width:100%"></a>
+               <h5 class="card-title"><div th:text="${sale.subject}"></div></h5>
+               <h7 class="card-text"><div th:if="${sale.author != null}" th:text="${sale.author.username}"></div></h7>
+               <p class="card-text"><div th:if="${sale.category != null}" th:text="${sale.category.name}"></div></p>
+               </div>
+            </div>
+         </div>
+         </div>
+   </div>
+
+</div>
+</html>

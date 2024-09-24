@@ -1,0 +1,148 @@
+package com.mysite.wooju.user;
+
+import java.lang.reflect.Member;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.mysite.wooju.category.Category;
+import com.mysite.wooju.category.CategoryService;
+import com.mysite.wooju.question.Question;
+import com.mysite.wooju.question.QuestionService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/user")
+
+public class UserController {
+    private final UserService userService;
+    
+    private final QuestionService questionService;
+    
+    private final UserRepository userRepository;
+    
+    private CategoryService categoryService;
+    
+    @GetMapping("/signup")
+    public String signup(UserCreateForm userCreateForm) {
+        return "signup_form";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
+    }
+ /*  @ModelAttribute
+    public String menu(Model model)
+    {
+        List<Category> categoryList = categoryService.getCategory();
+    	model.addAttribute("categories", categoryList);
+    	
+    	return "/login";
+    }
+    */
+    @PostMapping("/signup")
+    public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "signup_form";
+        }
+
+        if (!userCreateForm.getPassword1().equals(userCreateForm.getPassword2())) {
+            bindingResult.rejectValue("password2", "passwordInCorrect", 
+                    "2개의 패스워드가 일치하지 않습니다.");
+            return "signup_form";
+        }
+
+        try {
+            userService.create(userCreateForm.getUsername(), 
+                    userCreateForm.getEmail(), userCreateForm.getPassword1());
+        }catch(DataIntegrityViolationException e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+            return "signup_form";
+        }catch(Exception e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", e.getMessage());
+            return "signup_form";
+        }
+
+        return "redirect:/";
+    }
+    
+}
+    
+/*	@GetMapping("mypage/contents")
+    public String contents(Model model, @AuthenticationPrincipal SiteUser currentsiteuser, @PageableDefault Pageable pageable )
+    {
+		SiteUser siteuser = userRepository.findByusername(currentsiteuser.getUsername())
+				.orElseThrow(()-> new UsernameNotFoundException(currentsiteuser.getUsername()));
+    	
+    	Page<Question> questions = questionService.getPostListByMember(siteuser, pageable);
+    	
+    	model.addAttribute("questions", questions);
+    	return "contents_form";
+
+    }
+}*/
+    
+  /*  @GetMapping("/mypage/recreate")
+    public String recreate(Model model, @AuthenticationPrincipal SiteUser siteuser) {
+    	
+    	MemberForm memberform = new MemberForm();
+    	memberform.setName(siteuser.getUsername());
+    	memberform.setEmail(siteuser.getEmail());
+    	
+    	model.addAttribute("memberform", memberform);
+    	
+    	
+     
+    	return "recreate_form";
+    }
+    
+    
+    @PostMapping("/mypage/recreate")
+    public String userEdit(MemberForm form, BindingResult result, @AuthenticationPrincipal SiteUser siteuser)
+    {
+    	if(result.hasErrors()) {
+    		return "redirect:/mypage/recreate";
+    	}
+    	
+    	userService.updateInfo(siteuser.getUsername(), form.getName(), form.getEmail());
+    	siteuser.setUsername(form.getName());
+    	siteuser.setEmail(form.getEmail());
+    	
+   
+
+    return "redirect:/mypage/recreate";
+    }
+    
+    
+    /*@GetMapping("/mypage/recreate")
+    public String recreate() {
+    	
+    	return"mypage/recreate";
+    }
+    
+}*/

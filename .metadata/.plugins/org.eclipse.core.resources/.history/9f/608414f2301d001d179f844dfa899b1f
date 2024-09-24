@@ -1,0 +1,10 @@
+<a
+th:href="#gotobottom"
+title="Go to Bottom"
+style=" position: fixed; bottom: 30px; right: 5px;"
+>
+<img
+th:src="img/uni.jpg"
+style="width: 100px; height: 100px; border-radius: 15px;"
+/>
+</a>

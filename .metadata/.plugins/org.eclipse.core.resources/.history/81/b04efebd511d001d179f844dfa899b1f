@@ -1,0 +1,49 @@
+<html layout:decorate="~{layout}">
+
+<div layout:fragment="content" class="container my-3">
+	<div class="row my-3">
+		<div class="col-6">
+			<a th:href="@{/sale/create}" class="btn btn-primary">상품 등록하기</a>
+		</div>
+		<div class="col-6">
+			<div class="input-group">
+				<input type="text" id="search_kw" class="form-control"
+					th:value="${kw}">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button"
+						id="btn_search">찾기</button>
+				</div>
+			</div>
+		</div>
+		<p>
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+
+						<div style="font-size: 30px">Would you use it? 여성 안심 중고 거래
+							플랫폼 우주마켓</div>
+						<p>
+						<div class="col-3" th:each="sale, loop: ${sales}">
+							<a th:href="@{|/sale/detail/${sale.id}|}"> <img
+								class="card-img-top" th:src="@{/img/main_logo_rm.png}" alt=""
+								style="width: 100%"></a>
+							<h5 class="card-title">
+								<div th:text="${sale.subject}"></div>
+							</h5>
+							<h7 class="card-text">
+							<div th:if="${sale.author != null}"
+								th:text="${sale.author.username}"></div>
+							</h7>
+							<p class="card-text">
+							<div th:if="${sale.category != null}"
+								th:text="${sale.category.name}"></div>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</html>
